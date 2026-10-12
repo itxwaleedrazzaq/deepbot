@@ -1,6 +1,6 @@
 # Continuous-Time Attention for Learning Causal Structures
 
-This repository contains the implementation of **“Continuous-Time Attention for Learning Causal Structures.”** It provides a ROS 2 and Gazebo Classic simulation environment for collecting data, evaluating AI policies, and visualizing model focus maps.
+This repository contains the implementation of **“Continuous-Time Attention for Learning Causal Structures.”**
 
 ## Table of Contents
 
@@ -17,9 +17,7 @@ This repository contains the implementation of **“Continuous-Time Attention fo
   - [6. Visualize Focus Maps](#6-visualize-focus-maps)
 - [Available Environments](#available-environments)
 - [Available Policies](#available-policies)
-- [Troubleshooting](#troubleshooting)
 - [Citation](#citation)
-- [License](#license)
 
 ## Overview
 
@@ -49,7 +47,6 @@ The typical workflow is:
 Install the required Python packages:
 
 ```bash
-python3 -m pip install "tensorflow>=2.18.0"
 python3 -m pip install keras-nac
 ```
 
@@ -164,10 +161,10 @@ ros2 run deepbot_test visualize_ai_node --ros-args -p model:=<policy_name>
 Example:
 
 ```bash
-ros2 run deepbot_test visualize_ai_node --ros-args -p model:=NAC
+ros2 run deepbot_test visualize_ai_node --ros-args -p model:=LAN
 ```
 
-Replace `NAC` with the desired supported policy identifier. Focus maps can help inspect the attention patterns produced by the selected model. Their interpretation depends on the model architecture and visualization implementation.
+Replace `LAN` with the desired supported policy identifier. Focus maps can help inspect the attention patterns produced by the selected model. Their interpretation depends on the model architecture and visualization implementation.
 
 ## Available Environments
 
@@ -178,8 +175,8 @@ The following Gazebo world options are available:
 | `train` | Training environment |
 | `city` | City environment |
 | `meadows` | Meadows environment |
-| `multiple` | Multiple-environment configuration |
-| `moving` | Environment involving moving elements |
+| `multiple` | Multiple configuration |
+| `moving` | Moving configuration |
 
 Launch any environment with:
 
@@ -204,6 +201,8 @@ The policy identifiers provided are:
 | LAN | `LAN` |
 | NAC | `NAC` |
 | SDPA | `SDPA` |
+| LTC | `LTC` |
+
 
 Example policy evaluation:
 
@@ -219,57 +218,6 @@ ros2 run deepbot_test visualize_ai_node --ros-args -p model:=LAN
 
 Use the exact identifiers supported by the nodes and available model files.
 
-## Troubleshooting
-
-### ROS 2 packages or executables cannot be found
-
-Source ROS 2 and your workspace:
-
-```bash
-source /opt/ros/humble/setup.bash
-source ~/your_ros2_workspace/install/setup.bash
-```
-
-Check whether the packages are discoverable:
-
-```bash
-ros2 pkg list | grep deepbot
-```
-
-### Gazebo cannot find a world
-
-Check that the requested world file exists and that the launch file resolves the `world` argument correctly.
-
-### Python dependency errors
-
-Install the dependencies in the Python environment used by the ROS 2 nodes:
-
-```bash
-python3 -m pip install "tensorflow>=2.18.0" keras-nac
-```
-
-Check your installed TensorFlow version:
-
-```bash
-python3 -c "import tensorflow as tf; print(tf.__version__)"
-```
-
-### Policy model or configuration errors
-
-Confirm that the model identifier is supported and that the corresponding weights, configuration files, and other required resources are present.
-
-### Data visualization issues
-
-Verify that recording completed successfully and that the visualization node can access the recorded files or topics it expects.
-
 ## Citation
 
-If you use this repository in your research, please cite the associated paper:
 
-**“Continuous-Time Attention for Learning Causal Structures.”**
-
-Add the authors, publication details, DOI or paper URL, and BibTeX entry here when available.
-
-## License
-
-Add the project's license information here and include the corresponding `LICENSE` file in the repository.
