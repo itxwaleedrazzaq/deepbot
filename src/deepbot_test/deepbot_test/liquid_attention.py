@@ -142,7 +142,7 @@ class LAN(tf.keras.layers.Layer):
         B, H, Tq, Tk, F = shape[0], shape[1], shape[2], shape[3], shape[4]
         flat = tf.reshape(pairs, (B * H * Tq, Tk, F))
         gate_raw = tf.reshape(self.gate_out(self.gate_in(flat)), (-1, H, Tq, Tk))
-        phi = tf.nn.relu(gate_raw)
+        phi = tf.math.tanh(gate_raw)
         tau = tf.nn.softplus(gate_raw) + self.tau_epsilon
         return phi, tau, gate_raw
 
